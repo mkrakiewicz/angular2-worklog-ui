@@ -1,10 +1,16 @@
 ﻿import {Injectable} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
+import { Subject }    from 'rxjs/Subject';
 import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
+
+    private loggedInSource = new Subject<boolean>();
+
+    loggedIn$ = this.loggedInSource.asObservable();
+
     constructor(private http:Http) {
     }
 
@@ -36,8 +42,8 @@ export class AuthenticationService {
                 if (user && token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    this.loggedInSource.next(true);
                 }
-
 
                 return user;
             });
@@ -46,5 +52,44 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        this.loggedInSource.next(false);
     }
+
+
+    acl() {
+        var currentUser = this.getUserFromLocalStorage();
+        if (currentUser) {
+            return currentUser.acl;
+        }
+        return {};
+    }
+
+    private getUserFromLocalStorage() {
+        var currentUser = localStorage.getItem('currentUser');
+        if (currentUser)
+        {
+            return JSON.parse(currentUser);
+        }
+        return null;
+    }
+
+
+    user() {
+        var currentUser = this.getUserFromLocalStorage();
+        if (currentUser) {
+            return currentUser.user;
+        }
+        return {};
+    }
+
+
+    loggedIn() {
+        var currentUser = this.getUserFromLocalStorage();
+        if (currentUser) {
+            return !!currentUser.token;
+        }
+        return false;
+    }
+
+
 }
