@@ -5,5 +5,5 @@
 
 export const environment = {
     production: false,
-    apiEndpoint: 'http://www.test.xxx/api/'
+    apiEndpoint: 'http://fake.test.url/api/'
 };
