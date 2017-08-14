@@ -13,10 +13,13 @@ import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
-import { HomeComponent } from './home/index';
+import { AlertService, AuthenticationService, UserService, WorklogService } from './_services/index';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
+import { WorklogSettingsComponent } from './worklog-settings/worklog-settings.component';
+import { ListOfWorklogsComponent } from './list-of-worklogs/list-of-worklogs.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -28,16 +31,19 @@ import { RegisterComponent } from './register/index';
   declarations: [
     AppComponent,
     AlertComponent,
-    HomeComponent,
+    DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    WorklogSettingsComponent,
+    ListOfWorklogsComponent,
+    UsersComponent
   ],
   providers: [
     AuthGuard,
     AlertService,
     AuthenticationService,
     UserService,
-
+    WorklogService,
     // providers used to create fake backend
     // fakeBackendProvider,
     // MockBackend,

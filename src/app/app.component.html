@@ -2,20 +2,20 @@
   <h4>Input Of Worklogs</h4>
   <ul class="nav nav-tabs">
     <li *ngIf="!loggedIn">
-      <a to="/dashboard">Dashboard</a>
+      <a routerLink="/dashboard">Dashboard</a>
     </li>
     <li *ngIf="loggedIn && acl.access_worklogs">
-      <a to="/list-of-worklogs">List of worklogs</a>
+      <a routerLink="/list-of-worklogs">List of worklogs</a>
     </li>
     <li *ngIf="loggedIn && acl.access_users">
-      <a to="/users">Users</a>
+      <a routerLink="/users">Users</a>
     </li>
     <li *ngIf="loggedIn && acl.access_user_settings">
-      <a to="/settings">Settings</a>
+      <a routerLink="/settings">Settings</a>
     </li>
     <li>
-      <a *ngIf="loggedIn" to="/logout">Log out</a>
-      <a routerLink="login" routerLinkActive="active">Log in</a>
+      <a *ngIf="loggedIn" routerLink="login">Log out</a>
+      <a *ngElse routerLink="login" routerLinkActive="active">Log in</a>
     </li>
     <li *ngIf="!loggedIn">
       <a routerLink="register" routerLinkActive="active">Register</a>
