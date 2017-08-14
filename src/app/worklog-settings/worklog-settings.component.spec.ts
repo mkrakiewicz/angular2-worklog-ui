@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorklogSettingsComponent } from './worklog-settings.component';
 
-describe('WorklogSettingsComponent', () => {
+xdescribe('WorklogSettingsComponent', () => {
   let component: WorklogSettingsComponent;
   let fixture: ComponentFixture<WorklogSettingsComponent>;
 

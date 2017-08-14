@@ -1,8 +1,10 @@
-﻿import {Injectable} from '@angular/core';
+﻿import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import { Subject }    from 'rxjs/Subject';
+import {Subject}    from 'rxjs/Subject';
 import 'rxjs/add/operator/map'
+import {APP_CONFIG} from "../config/app.config";
+import {IAppConfig} from "../config/iapp-config";
 
 @Injectable()
 export class AuthenticationService {
@@ -11,7 +13,7 @@ export class AuthenticationService {
 
     loggedIn$ = this.loggedInSource.asObservable();
 
-    constructor(private http:Http) {
+    constructor(@Inject(APP_CONFIG) private config:IAppConfig, private http:Http) {
     }
 
     login(username:string, password:string) {
@@ -21,7 +23,7 @@ export class AuthenticationService {
         var optionses = new RequestOptions({headers: headers});
         debugger;
         return this.http.post(
-            'http://laravel-worklog-calculator.public.dev/oauth/token',
+            this.config.apiEndpoint + 'oauth/token',
             JSON.stringify(data),
             optionses
         )
@@ -45,7 +47,7 @@ export class AuthenticationService {
                     this.loggedInSource.next(true);
                 }
 
-                return user;
+                return currentUser;
             });
     }
 
@@ -66,8 +68,7 @@ export class AuthenticationService {
 
     private getUserFromLocalStorage() {
         var currentUser = localStorage.getItem('currentUser');
-        if (currentUser)
-        {
+        if (currentUser) {
             return JSON.parse(currentUser);
         }
         return null;

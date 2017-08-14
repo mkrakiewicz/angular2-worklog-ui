@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('angular2-worklog-ui App', () => {
+xdescribe('angular2-worklog-ui App', () => {
   let page: AppPage;
 
   beforeEach(() => {

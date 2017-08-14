@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { WorklogSettingsService } from './worklog-settings.service';
 
-describe('WorklogSettingsService', () => {
+xdescribe('WorklogSettingsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [WorklogSettingsService]
