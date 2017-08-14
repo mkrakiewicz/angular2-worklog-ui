@@ -1,24 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import {APP_CONFIG, IAppConfig} from './../config'
+import {Injectable, Inject} from '@angular/core';
+import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import {BaseService} from "./base.service";
 
 @Injectable()
-export class WorklogService {
-
-
-  constructor(private http: Http) { }
-
-  getAll() {
-    //noinspection TypeScriptValidateTypes
-    return this.http.get('http://laravel-worklog-calculator.public.dev/api/worklogs', this.jwt()).map((response: Response) => response.json().data);
-  }
-  
-  private jwt() {
-    // create authorization header with jwt token
-    let headers = new Headers({'Content-Type': 'application/json'});
-    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (currentUser && currentUser.token) {
-      headers.append('Authorization','Bearer ' + currentUser.token);
+export class WorklogService extends BaseService {
+    constructor(@Inject(APP_CONFIG) config:IAppConfig,
+                http:Http) {
+        super('worklogs', config, http);
     }
-    return new RequestOptions({ headers: headers });
-  }
 }

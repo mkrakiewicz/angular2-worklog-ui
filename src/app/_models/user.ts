@@ -1,7 +1,7 @@
-﻿export class User {
-    id: number;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+﻿import {Model} from "./model";
+export class User extends Model {
+    username:string;
+    password:string;
+    firstName:string;
+    lastName:string;
 }

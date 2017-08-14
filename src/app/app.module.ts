@@ -1,3 +1,4 @@
+import {APP_CONFIG, AppConfig} from './config'
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
@@ -39,6 +40,7 @@ import { UsersComponent } from './users/users.component';
     UsersComponent
   ],
   providers: [
+    { provide: APP_CONFIG, useValue: AppConfig },
     AuthGuard,
     AlertService,
     AuthenticationService,
