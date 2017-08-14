@@ -1,19 +1,38 @@
-<!-- main app container -->
-<div class="jumbotron">
-  <div class="container">
-    <div class="col-sm-8 col-sm-offset-2">
-      <alert></alert>
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+<div id="app">
+  <h4>Input Of Worklogs</h4>
+  <ul class="nav nav-tabs">
+    <li *ngIf="!loggedIn">
+      <a to="/dashboard">Dashboard</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_worklogs">
+      <a to="/list-of-worklogs">List of worklogs</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_users">
+      <a to="/users">Users</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_user_settings">
+      <a to="/settings">Settings</a>
+    </li>
+    <li>
+      <a *ngIf="loggedIn" to="/logout">Log out</a>
+      <a routerLink="login" routerLinkActive="active">Log in</a>
+    </li>
+    <li *ngIf="!loggedIn">
+      <a routerLink="register" routerLinkActive="active">Register</a>
+    </li>
+    <li class="userInfo pull-right" *ngIf="loggedIn">
+      <a>{{user.name}} - {{user.email}}</a>
+    </li>
+  </ul>
 
-<!-- credits -->
-<div class="text-center">
-  <p>
-    <a href="http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial" target="_top">Angular 2 User Registration and Login Example & Tutorial</a>
-  </p>
-  <p>
-    <a href="http://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-  </p>
+  <alert></alert>
+
+  <div id="routerView">
+    <!--<template>-->
+      <router-outlet></router-outlet>
+    <!--</template>-->
+    <!--<template>-->
+      <p>You are logged {{ loggedIn ? 'in' : 'out' }}.</p>
+    <!--</template>-->
+  </div>
 </div>
