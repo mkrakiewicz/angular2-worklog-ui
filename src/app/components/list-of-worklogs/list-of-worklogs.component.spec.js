@@ -1,7 +1,7 @@
 "use strict";
 var testing_1 = require('@angular/core/testing');
 var list_of_worklogs_component_1 = require('./list-of-worklogs.component');
-xdescribe('ListOfWorklogsComponent', function () {
+describe('ListOfWorklogsComponent', function () {
     var component;
     var fixture;
     beforeEach(testing_1.async(function () {

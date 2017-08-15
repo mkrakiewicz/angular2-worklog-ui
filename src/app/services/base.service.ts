@@ -2,6 +2,7 @@
 import {Injectable, Inject} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {Model} from '../models';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BaseService {

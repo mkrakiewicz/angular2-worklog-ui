@@ -1,7 +1,7 @@
 "use strict";
 var testing_1 = require('@angular/core/testing');
 var dashboard_component_1 = require('./dashboard.component');
-xdescribe('DashboardComponent', function () {
+describe('DashboardComponent', function () {
     var component;
     var fixture;
     beforeEach(testing_1.async(function () {

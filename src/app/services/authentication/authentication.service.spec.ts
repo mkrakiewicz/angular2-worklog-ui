@@ -1,7 +1,7 @@
 import {TestBed, inject, fakeAsync, tick} from '@angular/core/testing';
 
 import {AuthenticationService} from './authentication.service';
-import {APP_CONFIG, AppConfigTest} from "../config";
+import {APP_CONFIG, AppConfig} from "../../config";
 import {BaseRequestOptions, Response, ResponseOptions, Http, ConnectionBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {MockLoginAuth} from './authentication.service.mock';
@@ -10,7 +10,7 @@ describe('AuthenticationService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: APP_CONFIG, useValue: AppConfigTest},
+                {provide: APP_CONFIG, useValue: AppConfig},
                 AuthenticationService,
                 MockBackend,
                 BaseRequestOptions,

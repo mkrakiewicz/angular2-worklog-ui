@@ -1,7 +1,7 @@
 "use strict";
 var testing_1 = require('@angular/core/testing');
 var users_component_1 = require('./users.component');
-xdescribe('UsersComponent', function () {
+describe('UsersComponent', function () {
     var component;
     var fixture;
     beforeEach(testing_1.async(function () {

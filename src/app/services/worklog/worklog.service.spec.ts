@@ -1,7 +1,7 @@
 import {TestBed, inject, fakeAsync, tick} from '@angular/core/testing';
 
 import {WorklogService} from './worklog.service';
-import {APP_CONFIG, AppConfigTest} from "../config";
+import {APP_CONFIG, AppConfig} from "../../config";
 import {BaseRequestOptions, Response, ResponseOptions, Http, ConnectionBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import {WorklogsGetMock} from './worklog.service.mock';
@@ -10,14 +10,15 @@ describe('WorklogService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                {provide: APP_CONFIG, useValue: AppConfigTest},
+                {provide: APP_CONFIG, useValue: AppConfig},
                 WorklogService,
                 MockBackend,
                 BaseRequestOptions,
                 {
                     provide: Http, useFactory: (backend:ConnectionBackend, defaultOptions:BaseRequestOptions) => {
                     return new Http(backend, defaultOptions)
-                }, deps: [MockBackend, BaseRequestOptions]
+                },
+                    deps: [MockBackend, BaseRequestOptions]
                 },
             ]
         });
