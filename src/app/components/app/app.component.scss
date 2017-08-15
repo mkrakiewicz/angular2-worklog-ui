@@ -1,0 +1,16 @@
+
+#app {
+  margin: 20px;
+  margin-bottom: 200px;
+  ul.nav {
+    margin-bottom: 10px;
+    li.userInfo a {
+      color: black;
+      background: none;
+      &:hover {
+        background: none;
+        border-color: transparent;
+      }
+    }
+  }
+}

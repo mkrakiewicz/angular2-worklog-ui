@@ -6,6 +6,9 @@ module.exports = function (config) {
     config.set({
         basePath: '',
         frameworks: ['jasmine', '@angular/cli'],
+        bundlerOptions: {
+            entrypoints: /\.spec\.ts$/
+        },
         plugins: [
             require('karma-jasmine'),
             require('karma-chrome-launcher'),
@@ -22,8 +25,9 @@ module.exports = function (config) {
             fixWebpackSourcePaths: true
         },
         angularCli: {
-            environment: 'dev'
+            environment: 'test'
         },
+        includeAllSources: true,
         reporters: ['progress', 'kjhtml'],
         port: 9876,
         colors: true,

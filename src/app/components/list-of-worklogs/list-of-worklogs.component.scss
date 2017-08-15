@@ -1,0 +1,25 @@
+#listOfWorklogs {
+  #search {
+    div:last-child {
+      padding-left: 0;
+    }
+    label {
+      white-space: nowrap;
+      display: block;
+    }
+    input {
+      -webkit-transform: translate(0);
+      overflow: hidden;
+    }
+  }
+  table {
+    tr.worklog {
+      background-color: rgba(0, 128, 0, 0.6);
+    }
+    tr.exceededWorklogs {
+      background-color: rgba(255, 0, 0, 0.62);
+      color: white;
+    }
+
+  }
+}

@@ -1,24 +1,19 @@
-﻿import { Routes, RouterModule } from '@angular/router';
+﻿import {Routes, RouterModule} from '@angular/router';
+import {AuthGuard} from './guards';
+import * as AppComponents from './components';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/index';
-import { RegisterComponent } from './register/index';
-import { AuthGuard } from './_guards/index';
-import { WorklogSettingsComponent } from './worklog-settings/worklog-settings.component';
-import { ListOfWorklogsComponent } from './list-of-worklogs/list-of-worklogs.component';
-import { UsersComponent } from './users/users.component';
-const appRoutes: Routes = [
-    { path: '', component: DashboardComponent },
-    { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'list-of-worklogs', component: ListOfWorklogsComponent, canActivate: [AuthGuard] },
-    { path: 'settings', component: WorklogSettingsComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+const appRoutes:Routes = [
+    {path: '', component: AppComponents.DashboardComponent},
+    {path: 'home', component: AppComponents.DashboardComponent, canActivate: [AuthGuard]},
+    {path: 'list-of-worklogs', component: AppComponents.ListOfWorklogsComponent, canActivate: [AuthGuard]},
+    {path: 'settings', component: AppComponents.WorklogSettingsComponent, canActivate: [AuthGuard]},
+    {path: 'users', component: AppComponents.UsersComponent, canActivate: [AuthGuard]},
 
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    {path: 'login', component: AppComponents.LoginComponent},
+    {path: 'register', component: AppComponents.RegisterComponent},
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '' }
-]; 
+    {path: '**', redirectTo: ''}
+];
 
-export const routing = RouterModule.forRoot(appRoutes, { useHash: true });
+export const routing = RouterModule.forRoot(appRoutes, {useHash: true});
