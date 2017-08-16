@@ -4,7 +4,7 @@ import {AuthenticationService} from './authentication.service';
 import {APP_CONFIG, AppConfig} from "../../config";
 import {BaseRequestOptions, Response, ResponseOptions, Http, ConnectionBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {MockLoginAuth} from './authentication.service.mock';
+import {ExpectedHttpData} from './expected.http.data';
 
 describe('AuthenticationService', () => {
     beforeEach(() => {
@@ -32,7 +32,7 @@ describe('AuthenticationService', () => {
 
             // expect(authenticationService.loggedIn()).toBeFalsy();
 
-            let response = new ResponseOptions({body: MockLoginAuth});
+            let response = new ResponseOptions({body: ExpectedHttpData});
 
             mockBackend.connections.subscribe(connection => {
                 expect(connection.request.url).toBe('http://fake.test.url/api/oauth/token');

@@ -4,7 +4,7 @@ import {WorklogService} from './worklog.service';
 import {APP_CONFIG, AppConfig} from "../../config";
 import {BaseRequestOptions, Response, ResponseOptions, Http, ConnectionBackend} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {WorklogsGetMock} from './worklog.service.mock';
+import {ExpectedHttpData} from './expected.http.data';
 
 describe('WorklogService', () => {
     beforeEach(() => {
@@ -31,7 +31,7 @@ describe('WorklogService', () => {
     it('should return worklogs', fakeAsync(inject([WorklogService, MockBackend],
         (worklogService:WorklogService, mockBackend:MockBackend) => {
 
-            let response = new ResponseOptions({body: WorklogsGetMock});
+            let response = new ResponseOptions({body: ExpectedHttpData});
 
             mockBackend.connections.subscribe(connection => {
                 expect(connection.request.url).toBe('http://fake.test.url/api/worklogs');
@@ -46,7 +46,7 @@ describe('WorklogService', () => {
 
             tick();
             expect(result.length).toEqual(13);
-            expect(result).toEqual(JSON.parse(WorklogsGetMock).data);
+            expect(result).toEqual(JSON.parse(ExpectedHttpData).data);
         }))
     );
 });

@@ -1,4 +1,4 @@
-export const MockLoginAuth = `{
+export const ExpectedHttpData = `{
     "acl": {
         "access_worklogs": true,
         "access_users": true,

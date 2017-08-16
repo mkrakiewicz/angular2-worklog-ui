@@ -11,54 +11,29 @@ import {BaseRequestOptions} from '@angular/http';
 import {routing}        from './../../app.routing';
 import {AlertComponent} from './../../directives';
 import {AuthGuard} from './../../guards/index';
-import * as AppServices from './../../services';
-import * as AppComponents from './../../components';
+import {WorklogService} from "../../services";
+import {ExpectedHttpData} from "../../services/worklog/expected.http.data";
 
 describe('ListOfWorklogsComponent', () => {
   let component: ListOfWorklogsComponent;
-  let fixture: ComponentFixture<ListOfWorklogsComponent>;
+  let service: WorklogService;
+  let spy: any;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        routing
-      ],
-      declarations: [
-        AppComponents.AppComponent,
-        AlertComponent,
-        AppComponents.DashboardComponent,
-        AppComponents.LoginComponent,
-        AppComponents.RegisterComponent,
-        AppComponents.WorklogSettingsComponent,
-        AppComponents.ListOfWorklogsComponent,
-        AppComponents.UsersComponent
-      ],
-      providers: [
-        {provide: APP_CONFIG, useValue: AppConfig},
-        AuthGuard,
-        AppServices.AlertService,
-        AppServices.AuthenticationService,
-        AppServices.UserService,
-        AppServices.WorklogService,
-        // providers used to create fake backend
-        // fakeBackendProvider,
-        // MockBackend,
-        BaseRequestOptions
-      ],
-    })
-    .compileComponents();
+    service = new WorklogService(null,null);
+    component = new ListOfWorklogsComponent(service);
+    fixture = TestBed.createComponent(ListOfWorklogsComponent);
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ListOfWorklogsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should be created xx', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render worklog elements', async(() => {
+    spyOn(service, 'getAll').and.callFake(function(){return JSON.parse(ExpectedHttpData).data});
+    fixture.detectChanges();
+    const compiled = component.debugElement.nativeElement;
+    expect(compiled.querySelector('table').textContent).toContain('Programming in C#');
+  }));
+
 });

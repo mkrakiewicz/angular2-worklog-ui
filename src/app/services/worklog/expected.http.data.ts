@@ -1,4 +1,4 @@
-export const WorklogsGetMock = `{
+export const ExpectedHttpData = `{
     "success": true,
     "data": [
         {
