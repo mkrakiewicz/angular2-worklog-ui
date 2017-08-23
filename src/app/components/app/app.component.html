@@ -1,0 +1,38 @@
+<div id="app">
+  <h1>Input Of Worklogs</h1>
+  <ul class="nav nav-tabs">
+    <li *ngIf="!loggedIn">
+      <a routerLink="/dashboard">Dashboard</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_worklogs">
+      <a routerLink="/list-of-worklogs">List of worklogs</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_users">
+      <a routerLink="/users">Users</a>
+    </li>
+    <li *ngIf="loggedIn && acl.access_user_settings">
+      <a routerLink="/settings">Settings</a>
+    </li>
+    <li>
+      <a *ngIf="loggedIn" routerLink="login">Log out</a>
+      <a *ngIf="!loggedIn" routerLink="login">Log in</a>
+    </li>
+    <li *ngIf="!loggedIn">
+      <a routerLink="register" routerLinkActive="active">Register</a>
+    </li>
+    <li class="userInfo pull-right" *ngIf="loggedIn">
+      <a>{{user.name}} - {{user.email}}</a>
+    </li>
+  </ul>
+
+  <alert></alert>
+
+  <div id="routerView">
+    <!--<template>-->
+      <router-outlet></router-outlet>
+    <!--</template>-->
+    <!--<template>-->
+      <p>You are logged {{ loggedIn ? 'in' : 'out' }}.</p>
+    <!--</template>-->
+  </div>
+</div>

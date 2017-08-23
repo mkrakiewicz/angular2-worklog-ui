@@ -1,0 +1,159 @@
+<div id="listOfWorklogs">
+
+    <h2>List of Worklogs</h2>
+    <p>Here you can add a worklog, or view a list of your worklogs below.</p>
+    <a class="btn btn-primary btn-lg pull-right" click="showAddworklogModal"><i class="fa fa-plus"></i> Add</a>
+    <div id="search">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Date range (from - to)</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="searchDatePeriodFrom" v-model="search.date.from" type="text" class="form-control"
+                               placeholder="2017-07-05">
+                    </div>
+                    <div class="col-md-6">
+                        <input id="searchDatePeriodTo" v-model="search.date.to" type="text" class="form-control"
+                               placeholder="2017-08-06">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label>Time range (from - to)</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="searchTimeFrom" v-model="search.time.from" type="text" class="form-control"
+                           placeholder="12:00">
+                </div>
+                <div class="col-md-6">
+                    <input id="searchTimeTo" v-model="search.time.to" type="text" class="form-control"
+                           placeholder="15:45">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label>&nbsp;</label>
+                <input click="getworklogs()" class="btn btn-primary" type="button" value="Filter">
+            </div>
+            <div class="col-md-1">
+                <label>&nbsp;</label>
+                <input click="resetSearch()" class="btn btn-default" type="button" value="Clear">
+            </div>
+        </div>
+    </div>
+    <table class="table table-borderless m-b-none">
+        <thead>
+        <tr>
+            <!--<th *ngIf="acl.crud_all_worklogs">User e-mail</th>-->
+            <th>Activity</th>
+            <th>Time spent (min)</th>
+            <th>When</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let worklog of worklogs" v-bind:class="{exceededWorklogs : worklog.exceeded_worklogs}"
+            class="worklog">
+            <!--<td *ngIf="acl.crud_all_worklogs">-->
+            <!--{{ worklog  }}-->
+            <!--</td>-->
+            <!-- Client Name -->
+            <td style="vertical-align: middle;">
+                {{ worklog.name }}
+            </td>
+            <td style="vertical-align: middle;">
+                {{ worklog.minutes }}
+            </td>
+            <td style="vertical-align: middle;">
+                {{ worklog.time }}
+            </td>
+            <!-- Revoke Button -->
+            <td style="vertical-align: middle;">
+                <div class="btn-group">
+                    <a click="showEditworklogModal(worklog)"
+                       class="btn btn-default"><i
+                            class="fa fa-edit"></i> Edit</a>
+                    <a click="showDeleteworklogModal(worklog)"
+                       class="btn btn-danger"><i
+                            class="fa fa-remove"></i> Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="pagination">
+        <button v-if="pagination.offsetFactor > 0" click="getworklogs(-1)" type="button" class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Previous page
+        </button>
+        <button v-if="worklogs.length > 0" click="getworklogs(1)" type="button" class="btn btn-primary pull-right">
+            Next page <i class="fa fa-arrow-right"></i></button>
+    </div>
+
+    <!--<bootstrap-modal id="modal-edit-worklog">-->
+    <!--<div slot="header"><span v-if="modal.worklog.id">Edit</span><span v-else>Add</span> worklog</div>-->
+    <!--<div slot="content">-->
+    <!--<form class="form-horizontal" role="form">-->
+
+    <!--<div v-for="(fieldName, fieldIndex) in modal.fields" class="form-group">-->
+    <!--<label :for="fieldIndex" class="col-md-3 control-label">{{fieldName}}</label>-->
+    <!--<div class="col-md-7">-->
+    <!--<input type="text"-->
+    <!--class="form-control" v-model="modal.worklog[fieldIndex]"-->
+    <!--:placeholder="fieldIndex == 'time' ? '2017-06-23 12:45:00' :''"-->
+    <!--:name="fieldIndex" required>-->
+    <!--<span v-if="modal.errors[fieldIndex]" class="help-block">-->
+    <!--<strong> {{modal.errors[fieldIndex].join() }} </strong>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div v-if="acl.crud_all_worklogs" class="form-group">-->
+    <!--<label class="col-md-3 control-label">User</label>-->
+    <!--<div class="col-md-7">-->
+
+    <!--<div class="dropdown">-->
+    <!--<button class="btn btn-default dropdown-toggle" type="button" id="userDropdown"-->
+    <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+    <!--Choose-->
+    <!--<span class="caret"></span>-->
+    <!--</button>-->
+    <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+    <!--<li v-for="user in users"><a href="#" click.prevent="selectUser(user)">{{user.email}}</a>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--</form>-->
+    <!--</div>-->
+    <!--<div slot="footer">-->
+    <!--<button click="handleEditworklogModalSave" type="button" class="btn btn-primary">-->
+    <!--Save-->
+    <!--</button>-->
+    <!--<button id="editModalCloseButton" type="button" class="btn btn-default" data-dismiss="modal">Close-->
+    <!--</button>-->
+    <!--</div>-->
+
+    <!--</bootstrap-modal>-->
+
+
+    <!--<bootstrap-modal id="modal-delete-worklog">-->
+    <!--<div slot="header">Delete worklog</div>-->
+    <!--<div slot="content">-->
+    <!--<p>Are you sure?</p>-->
+    <!--</div>-->
+    <!--<div slot="footer">-->
+    <!--<button click="handleworklogModalDelete" type="button" class="btn btn-danger" data-dismiss="modal">-->
+    <!--Delete-->
+    <!--</button>-->
+    <!--<button id="deleteModalCloseButton" type="button" class="btn btn-default" data-dismiss="modal">Close-->
+    <!--</button>-->
+    <!--</div>-->
+
+    <!--</bootstrap-modal>-->
+
+</div>
